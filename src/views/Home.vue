@@ -47,6 +47,9 @@ export default {
   data() {
     return {
       items: [],
+      page: 1,
+      total: 0,
+      prepage: 8,
     };
   },
   filters: {
@@ -54,7 +57,9 @@ export default {
   },
   async created() {
     // 登陆了吗？
-    let isLogin = true; //?
+    // let isLogin = true;
+    let isLogin = !!localStorage.getItem("token");
+
     if (!isLogin) {
       this.$router.push({ name: "Login" });
     } else {

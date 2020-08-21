@@ -20,38 +20,63 @@
 
         <div class="form-item">
           <label>
-            <span class="txt"></span>
             <button class="form-button primary" @click.prevent="doLogin">登录</button>
             <button class="form-button">注册</button>
           </label>
         </div>
+        <div class="txt">{{message}}</div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import { login } from "@/api";
+
 export default {
   name: "Login",
+
   data() {
     return {
       submitData: {
-        usename: "",
+        username: "",
         password: "",
       },
+      message: "",
     };
   },
+
   methods: {
-    doLogin() {
+    async doLogin() {
       //收集用户填写的用户名和密码
       console.log(
         "收集用户填写的用户名和密码",
-        this.$submitData
+        this.submitData
         // this.$refs.username.value,
         // this.$refs.password.value
       );
 
       //发送ajax请求
+      try {
+        let rs = await login({
+          name: this.submitData.username,
+          password: this.submitData.password,
+        });
+        this.message = "Login Success.";
+        //如果登录成功了，那么就需要把后端返回的用户登录的信息（token）保存到浏览器（localStorage）
+        // 把当前登陆的用户信息记录到localStorage里面
+        localStorage.setItem("user", JSON.stringify(rs.data));
+        //存储起来那个token令牌
+        localStorage.setItem("token", rs.headers.authorization);
+        // console.log(rs);
+
+        this.$router.push({
+          name: "Home",
+        });
+      } catch (e) {
+        console.dir(e);
+        this.message = e.response.data;
+      }
     },
   },
 };
