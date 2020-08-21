@@ -10,6 +10,7 @@ import Logon from "@/views/Register.vue";
 Vue.use(VueRouter);
 // 创建一个路由对象 和 koa 类似
 let router = new VueRouter({
+  // home.vue中的$router: 实际上就是 new VueRouter 得到的对象，它代表来整个应用的路由信息，提供路由公用的配置信息和方法，比如 push
   mode: "history",
   // 所有的路由映射，每一个路由就是一个对象
   routes: [
