@@ -3,7 +3,9 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to jing Li Vue.js App" /> -->
     <KHeader />
-    <router-view></router-view>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -18,3 +20,16 @@ export default {
   },
 };
 </script>
+
+<style>
+.fade-enter-active {
+  transition: opacity 6s;
+}
+.fade-leave-active {
+  transition: none;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
