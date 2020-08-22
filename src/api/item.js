@@ -12,3 +12,10 @@ export async function getItems(
     params,
   });
 }
+
+//获取指定id的商品
+export async function getItem(id) {
+  return await axios({
+    url: APIURL.item.getItem + "/" + id,
+  });
+}

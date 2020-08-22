@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 import Home from "@/views/Home.vue";
 import Detail from "@/views/Detail.vue";
 import Login from "@/views/Login.vue";
@@ -36,6 +37,15 @@ let router = new VueRouter({
       component: Logon,
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;

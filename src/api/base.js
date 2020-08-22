@@ -5,6 +5,7 @@ const BASEURL = "/api";
 const APIURL = {
   item: {
     getItems: "/items",
+    getItem: "/item",
   },
   user: {
     login: "/login",
