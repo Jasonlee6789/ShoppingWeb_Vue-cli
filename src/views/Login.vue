@@ -7,31 +7,41 @@
           <label>
             <span class="txt">姓名：</span>
             <!-- <input type="text" class="form-input" ref="username" /> -->
-            <input type="text" class="form-input" v-model="submitData.username" />
+            <input
+              type="text"
+              class="form-input"
+              v-model="submitData.username"
+            />
           </label>
         </div>
         <div class="form-item">
           <label>
             <span class="txt">密码：</span>
             <!-- <input type="password" class="form-input" ref="password" /> -->
-            <input type="password" class="form-input" v-model="submitData.password" />
+            <input
+              type="password"
+              class="form-input"
+              v-model="submitData.password"
+            />
           </label>
         </div>
 
         <div class="form-item">
           <label>
-            <button class="form-button primary" @click.prevent="doLogin">登录</button>
+            <button class="form-button primary" @click.prevent="doLogin">
+              登录
+            </button>
             <button class="form-button">注册</button>
           </label>
         </div>
-        <div class="txt">{{message}}</div>
+        <div class="txt">{{ message }}</div>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import { login } from "@/api";
+// import { login } from "@/api";
 
 export default {
   name: "Login",
@@ -58,23 +68,28 @@ export default {
 
       //发送ajax请求
       try {
-        let rs = await login({
+        //   let rs = await login({
+        //     name: this.submitData.username,
+        //     password: this.submitData.password,
+        //   });
+        await this.$store.dispatch("login", {
           name: this.submitData.username,
           password: this.submitData.password,
         });
+
         this.message = "Login Success.";
         //如果登录成功了，那么就需要把后端返回的用户登录的信息（token）保存到浏览器（localStorage）
-        // 把当前登陆的用户信息记录到localStorage里面
-        localStorage.setItem("user", JSON.stringify(rs.data));
-        //存储起来那个token令牌
-        localStorage.setItem("token", rs.headers.authorization);
+        // // 把当前登陆的用户信息记录到localStorage里面
+        // localStorage.setItem("user", JSON.stringify(rs.data));
+        // //存储起来那个token令牌
+        // localStorage.setItem("token", rs.headers.authorization);
         // console.log(rs);
 
         this.$router.push({
           name: "Home",
         });
       } catch (e) {
-        console.dir(e);
+        //console.dir(e);
         this.message = e.response.data;
       }
     },

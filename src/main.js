@@ -6,8 +6,12 @@ import "@/assets/static/css/css.css";
 
 import router from "@/router";
 
+import store from "@/store";
+
 Vue.config.productionTip = false;
 
+console.log("store");
+console.log(store);
 // import VueRouter from "vue-router";
 // import Main from "@/views/Main.vue";
 
@@ -25,6 +29,7 @@ Vue.config.productionTip = false;
 
 new Vue({
   router: router,
+  store,
   //Render函数是Vue2.x版本新增的一个函数；
   // 使用虚拟dom来渲染节点提升性能，因为它是基于JavaScript计算。
   // 通过使用createElement(h)来创建dom节点。
